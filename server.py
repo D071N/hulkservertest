@@ -5,7 +5,7 @@ import signal
 
 app = Flask(__name__)
 
-bot_process = subprocess.Popen(['python3' , 'bot.py'])
+bot_process = subprocess.Popen(['python3' , 'run.py'])
 
 
 def kill_subprocesses():
