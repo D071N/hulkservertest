@@ -53,6 +53,6 @@ updater.dispatcher.add_handler(CommandHandler('t', tmps))
 
 
 updater.dispatcher.add_handler(CommandHandler('start', start))
-updater.dispatcher.add_handler(CommandHandler('http', STRESS))
+updater.dispatcher.add_handler(CommandHandler('attack', STRESS))
 
 updater.start_polling()
