@@ -13,7 +13,7 @@ updater = Updater(token,use_context=True)
 s = 400000000
 
 def start(update: Update, context: CallbackContext):
-  update.message.reply_text(f"/http (url) {bot_number}")
+  update.message.reply_text(f"/attack (url) {bot_number}")
   
   
 def tmps(update: Update, context: CallbackContext):
@@ -27,7 +27,7 @@ def speed_start(url):
 
       
 def STRESS(update: Update, context: CallbackContext):
-  url = update.message.text.replace('/http', '')
+  url = update.message.text.replace('/attack', '')
   update.message.reply_text(f"METHOD: HTTP L7 THREADS : 400\n\nSTRESS: Send HTTP Packet With High Byte Time: {s} s")
   url_str = str(url)
   print(url_str)
